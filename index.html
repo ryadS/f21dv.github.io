@@ -1,1 +1,109 @@
-<h1>Data Visualisation and Analytics</h1>
+
+
+
+<link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+
+<br>
+<table align="center"><tr><td>
+
+F20DV/F21DV - <a href='https://www.macs.hw.ac.uk/students/cs/courses/f21dv-data-visualisation-and-analytics/'>Data Visualization and Analytics</a>
+<br>
+<br>
+
+<table>
+<thead id="headtoc">
+<tr>
+<td>Wk      		</td>
+<td>No      		</td>
+<td>Topic   		</td>
+<td>        		</td>
+<td>Lecture 		</td>
+<td>        		</td>
+<td>Notes   		</td>
+<td>Tasks           </td>
+<td>Quizzes    		</td>
+<td>Crossword 		</td>
+</tr>
+</thead>
+<tbody id="bodytoc">
+</tbody>
+</table>
+
+
+<br>Assessment:<br>Exam 0% <br>Coursework (100%) (Composed of Multiple Practical Assessments - see VLE for details)<br>
+
+
+</td></tr></table>
+
+
+
+
+<script>
+// Wk	No	Topic	[GAP]	Lecture	 [GAP]	Notes	Tasks	Quizzes	Crossword
+/*
+// files/folders follow naming convention
+material/
+  lectures/      // Lecture 00 - 
+  notes/         // Notes 00 -
+  quizzes/       // Quiz 00 - 
+  tasks/         // Task 00 - 
+  crosswords/    // Crossword 00 - 
+*/
+
+// l:lecture, n:notes, q:quiz, t:tasks, c:crosswords 
+
+let toc = [
+  { wk: '1', no: '00', name: 'Introduction'                   ,  l:true, n: true, t:true, q: true, c: true }, 
+  {          no: '01', name: 'Interactive Visualisations'     ,  l:true, n: true, t:true, q: false, c: false },
+  { wk: '2', no: '02', name: 'Scalable Applications'          ,  l:true },
+  { wk: '3', no: '03', name: 'Charts'                         ,  l:true },
+  { wk: '4', no: '04', name: 'Applied Examples'               ,  l:true },
+  { wk: '5', no: '05', name: 'Hierarchies'                    ,  l:true },
+  { wk: '6', no: '06', name: 'Reading Week (No Lectures)'    },
+  { wk: '7', no: '07', name: 'Topic Models'                   ,  l:true },
+  { wk: '8', no: '08', name: 'Simple Analytics'               ,  l:true },
+  { wk: '9', no: '09', name: 'Maps'                           ,  l:true },
+  { wk:'10', no: '10', name: 'Analytics and Aethetics'        ,  l:true },
+  { wk:'11', no: '11', name: 'Review & Support Lecture'       ,  l:true },
+];
+
+	// Slides	 	Notes	Task	Revision	Crossword
+
+let bodytoc = document.getElementById('bodytoc');
+for (let i=0; i<toc.length; i++)
+{
+	// Insert a row at the end of table
+	var newRow = bodytoc.insertRow();
+	
+	if ( toc[i].wk ) newRow.insertCell().innerHTML = toc[i].wk;
+	else             newRow.insertCell().innerHTML = ''; // week
+	
+	newRow.insertCell().innerHTML = toc[i].no;
+	newRow.insertCell().innerHTML = toc[i].name;
+	
+	newRow.insertCell().innerHTML = ' '; // gap
+	
+	if ( toc[i].l ) newRow.insertCell().innerHTML = `<a href='./material/lectures/Lecture ${toc[i].no} - ${toc[i].name}.html'>Slides</a>`;
+	else            newRow.insertCell().innerHTML = '-';
+	
+	newRow.insertCell().innerHTML = ' '; // gap
+	
+	if ( toc[i].n ) newRow.insertCell().innerHTML = `<a href='./material/notes/Notes ${toc[i].no} - ${toc[i].name}.html'>Notes</a>`;
+	else            newRow.insertCell().innerHTML = '-';
+	
+	if ( toc[i].t ) newRow.insertCell().innerHTML = `<a href='./material/tasks/Task ${toc[i].no} - ${toc[i].name}.html'>Task</a>`;
+	else            newRow.insertCell().innerHTML = '-';
+	
+	if ( toc[i].q ) newRow.insertCell().innerHTML = `<a href='./material/quizzes/Quiz ${toc[i].no} - ${toc[i].name}.html'>Quiz</a>`;
+	else            newRow.insertCell().innerHTML = '-';
+	
+	if ( toc[i].c ) newRow.insertCell().innerHTML = `<a href='./material/crosswords/Crossword ${toc[i].no} - ${toc[i].name}.html'>Crossword</a>`;
+	else            newRow.insertCell().innerHTML = '-';
+	
+}
+
+</script>
+
+
+
+
