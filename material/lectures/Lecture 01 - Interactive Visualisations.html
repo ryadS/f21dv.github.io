@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Data Visualization and Analytics </title>
+
+	<link rel="shortcut icon" type="image/x-icon" href="../../favicon.ico" />
+	<meta name="description" content="Creating beautiful interactive and engaging Data Visualization and Analytics">
+	<meta name="author" content="Ben Kenwright">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/reveal.css">
+	<link rel="stylesheet" href="./css/theme/white.css" id="theme">
+	
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="./lib/css/monokai.css">
+	
+	<link rel="stylesheet" href="./css/reveal-override.css"/>
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? './css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+<!-- Any section element inside of this container is displayed as a slide -->
+<div class="slides">
+
+<!-- -------------------------------------------------------------------- -->
+
+<section data-background="">
+	<h2>Introduction</h2>
+	<h4>F20DV/F21DV Data Visualization and Analytics</h4>
+	<p>
+		<small>2020-2021</small>
+	</p>
+	
+<aside class='notes'>
+</aside>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+
+
+<section data-background-video="./images/intro2.mp4">
+<aside class='notes'>
+</aside>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		## Overview
+
+		* Why is Visualization so Important?
+		* What is Interactive Visualisation?
+		* Visualization Tools
+		* D3 Library
+		* Examples
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+			
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## What do we mean by Visualization?
+
+	Visualisation: the use of visual elements to represent data
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+			
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## What do we mean by Visualization?
+
+	When we talk about **Visualisation**, we mean the use of **visual elements** to **represent data**
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+			
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## Interactive Visualisation
+	
+	Enabling the user to select
+	* different facets of the data to display
+	* different sets of data
+	* different representations of the same data
+	* essential for complex data
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+<!-- -------------------------------------------------------------------- -->
+			
+				
+<section data-background-iframe="https://geotraceroute.com/" data-background-interactive>
+	<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+		<h2 style="color:white">
+			Visualization Example - Shows Trace Route</h2>
+		<p>Visual Route Packets (source-destination)</p>
+		<p>Type 'hw.ac.uk'</p>
+		
+	</div>
+<aside class='notes'>
+Example of Geo-Trace program to visualize web communication packets
+</aside>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+
+<!-- -------------------------------------------------------------------- -->
+			
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## D3 
+	
+	* **What** is D3?
+	* **Why** use D3?
+	* **How** to get started with D3?
+	* **What** are the essential methods for D3?
+	
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+	
+	
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## What is D3?
+	
+	* D3 stands for **Data-Driven Documents** (D3)
+	* JavaScript library for producing dynamic, interactive data visualizations in web browsers
+	* Free, Open Source (allows for modular development and includes plugins and utilities)
+	* Compact and has long history (tested/debugged/iterations/versions)
+	* Currently on Version 7
+	
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## Method Chaining
+	
+	D3 objects are configured using a general convention called **method chaining**. Method chaining is a way to add capabilities to an object in one go.
+	
+	```js
+	let b = d3.select("body");
+	let p = b.append("p");
+	p.text("Have a great day!");
+	```
+	vs
+	```js
+	d3.select("body").append("p").text("Have a great day!");
+	```
+	
+	
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+		
+
+<section data-background='./images/cheatsheetd3js.png' data-background-size='70%'>
+	
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+	
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+
+	## Minimum Working D3 Example
+	
+```js
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script>
+console.log( 'd3:', d3 );
+
+const svg = d3.create("svg")
+console.log('svg:', svg);
+</script>
+```
+
+Try out the example, what are the outputs for the console?
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+			
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## Minimise User Load
+	
+	* Need to minimise user load and confusion
+    * Hence need simple and intuitive ways of **communicating change**
+	* And a simple programming model (or pattern) so that we can easily style classes of change
+	(animated effect)
+	   - Enter, update, remove
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+			
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## Three types of Change
+	
+	* **Enter**  - Visualise entry of new data (new visual element for the new data)
+	* **Update** - Visualise change to existing data (set data on visual element)
+	* **Exit**   - Visualise removal of data (remove old visual element)
+	
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+			
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## D3.js 
+	
+	Show and explain the **three types of change** using D3
+	
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+
+
+	
+
+
+<!-- -------------------------------------------------------------------- -->
+	
+<!-- -------------------------------------------------------------------- -->
+	
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+
+	## General Update Pattern
+	
+The **general update pattern** using **selection.data** methods directly (enter/update/exit) for updating the DOM based on new data is becoming **deprecated** . Instead, it's better to use the **selection.join**, as it is easier to remember, more concise, and has better default behavior! 
+
+<small>(References: 
+<a href='https://www.fabiofranchino.com/blog/the-new-d3.js-join-method-is-awesome-for-t/'>Ref0</a>,
+<a href='https://observablehq.com/@d3/general-update-pattern'>Ref1</a>)</small>
+
+<aside class='notes'> 
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+		
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+
+	## Basic SVG Text Component
+	
+```js
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+const svg = d3.select('body')
+              .append("svg"); // create svg
+
+svg.attr('viewBox', '0 -20 100 100'); // position svg on screen
+
+svg.append('text') // add text component to svg
+   .text('cat');   // set contents 
+</script>
+```
+
+Try out the example, what is the outputs?
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+	
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+
+	## Join (Enter - Update - Exit)
+	
+```js
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<svg viewBox="0 -20 200 200">
+<script>
+const svg = d3.select('svg');
+
+svg.append('text') // add text component to svg
+    .text('g');    // set content 
+
+svg.selectAll("text")        // only be 1 (as only single text element)
+    .data(['a', 'b', 'c'] )  // new data (old data was [g])
+	.join(
+	   function(enter)  { console.log('enter called');  },
+	   function(update) { console.log('update called'); },
+	   function(exit)   { console.log('exit called');   } 
+	);
+</script>
+```
+**selection.data** method for modifying array data (returns enter, update and exit method).  
+(note, also 'selection.datum' for single data).
+Try out the example, what are the outputs for the console?
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+	
+	
+	
+<!-- -------------------------------------------------------------------- -->
+	
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+
+	### Join (Enter - Update - Exit) 
+	#### (**Arrow Notation**)
+	
+```js
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<svg viewBox="0 -20 200 200">
+<script>
+const svg = d3.select('svg');
+
+svg.append('text') // add text component to svg
+    .text('g');    // set content 
+
+svg.selectAll("text")       // only be 1 (as only single text element)
+    .data(['a', 'b', 'c'] ) // new data 
+	.join(
+	   enter  => { console.log('enter called');  },
+	   update => { console.log('update called'); },
+	   exit   => { console.log('exit called');   } 
+	);
+</script>
+```
+**Notice the arrow notation for functions compared to the previous version**
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+	
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+
+	### Join (Enter - Update - Exit)
+	
+```js
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<svg viewBox="0 -20 200 200">
+<script>
+const svg = d3.select('svg');
+
+svg.append('text') // add text component to svg
+   .text('g');     // set content 
+
+svg.selectAll("text")
+    .data(['a', 'b', 'c'] )
+  .join(
+     enter  => { enter.append('text');         },
+     update => { console.log('update called'); },
+     exit   => { console.log('exit called');   } 
+  );
+</script>
+```
+
+The example will add three new 'text' components to the 'svg', but you won't see anything, as they have no 'content'.
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+<!-- -------------------------------------------------------------------- -->
+	
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+
+	### Join (Enter - Update - Exit)
+	
+```js
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<svg viewBox="0 -20 200 200">
+<script>
+const svg = d3.select('svg');
+
+svg.append('text') // add text component to svg
+   .text('g');     // set content 
+
+svg.selectAll("text")
+   .data(['a', 'b', 'c'] )
+   .join(
+     enter  => { enter.append('text').text(d=>d).attr('x', (d,i)=> i*10 );  },
+     update => { console.log('update called'); },
+     exit   => { console.log('exit called');   } 
+  );
+</script>
+</script>
+```
+
+You can see some of the 'new' visual elements and data (but the old' data is still viewable.
+Why?  ('enter' only deals with adding new visual elements to accomidate the change in data size)
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+	
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+
+	### Join (Enter - Update - Exit)
+	
+```js
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<svg viewBox="0 -20 200 200">
+<script>
+const svg = d3.select('svg');
+
+svg.append('text') // add text component to svg
+   .text('g');     // set content 
+
+svg.selectAll("text")
+   .data(['a', 'b', 'c'] )
+   .join(
+     enter  => { enter.append('text').text(d=>d).attr('x', (d,i)=> i*10 );  },
+     update => { update.attr('fill', 'blue'); },
+     exit   => { console.log('exit called');   } 
+  );
+</script>
+</script>
+```
+
+**'update'** deals with the **old to new**.  For illustration purposes, we've used the **attr** method to change the color of the old data (see what is going to be replaced)
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+	
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+
+	### Join (Enter - Update - Exit)
+	
+```js
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<svg viewBox="0 -20 200 200">
+<script>
+const svg = d3.select('svg');
+
+svg.append('text') // add text component to svg
+   .text('g');     // set content 
+
+svg.selectAll("text")
+   .data(['a', 'b', 'c'] )
+   .join(
+     enter  => { enter.append('text').text(d=>d).attr('x', (d,i)=> i*10 );  },
+     update => { update.text(d=>d).attr('fill', 'blue'); },
+     exit   => { console.log('exit called');   } 
+  );
+</script>
+</script>
+```
+
+**'update'** modify old data, so it's now **replaced** with the new data (also leave it 'highlighted' so we can see what changed.
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+	
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+
+	## Join (Enter - Update - Exit)
+	
+```js
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<svg viewBox="0 -20 200 200">
+<script>
+const svg = d3.select('svg');
+
+svg.append('text') // add text component to svg
+   .text('g');     // set content 
+
+svg.selectAll("text")
+   .data(['a', 'b', 'c'] )
+   .join(
+     enter  => { enter.append('text').text(d=>d).attr('x', (d,i)=> i*10 );  },
+     update => { update.text(d=>d).attr('fill', 'blue'); },
+     exit   => { exit.remove();   } 
+  );
+</script>
+</script>
+```
+
+**'exit'** isn't really needed in this example - it would deal with any visual elements which need to be removed (e.g., less data than we started with)
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+<!--
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		## Questions
+
+		* When did the internet begin?
+		* Why is the internet so important?
+		* What is the internet?
+		
+		![](./images/worldweb.jpg)
+		
+	</textarea>
+</section>
+-->
+
+<!-- -------------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## **selection.data** - key function
+
+	The key function explains how to join the data to the elements. The **default key function** if you don't supply one is to **use the index**.
+	
+	```
+	selection.data(dataSet, keyFunction /*optional*/)
+	```
+	
+	When to use the **key function?** - when you're looking for elements with data properties which match the data you pass in (not just based on the index)
+	
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+	
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	### Example **selection.data** - key function
+
+<pre><code class="stretch">
+<div class='no-key'>  <div class='a'>already here</div> </div>
+<div class='yes-key'> <div>already here</div>           </div>
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script>
+function id (d) { return d; }
+
+d3.select('.no-key').selectAll('div')
+    .data([1,2,3])
+    .join( 
+        enter=>{enter.append('div').text(id); },
+        update=>{},
+        exit=>{}
+    );
+
+d3.select('.yes-key').selectAll('div')
+    .data([1,2,3], id)
+    .join( 
+        enter=>{enter.append('div').text(id); },
+        update=>{},
+        exit=>{}
+    );
+</script>
+</code></pre>
+	
+	
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+			
+			
+	
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## Summary
+
+	* Understand Core Concepts 
+	* Getting Started with D3
+	* Interactive Aspect (Changing Data)
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+			
+	
+	
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## To do this week ...
+
+	* Read over the lectures 
+	* **Review** the revision questions 
+	* Work through tutorial practicals 
+	* Experiment (get into good habits) 
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+			
+	
+</div>
+
+</div>
+
+<script src="js/reveal.js"></script>
+
+<script>
+
+// More info https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+	controls: true,
+	progress: true,
+	center: true,
+	hash: true,
+
+	transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+	// More info https://github.com/hakimel/reveal.js#dependencies
+	dependencies: [
+		{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: 'plugin/highlight/highlight.js', async: true },
+		{ src: 'plugin/search/search.js', async: true },
+		{ src: 'plugin/zoom-js/zoom.js', async: true },
+		{ src: 'plugin/notes/notes.js', async: true },
+		{ src: 'plugin/tts/tts_min_reveal.js', async: false}
+	]
+});
+
+</script>
+
+<script src='plugin/codepanel/codepanel.js'></script>
+<script>
+setupcodepanel(0, 'https://jsitor.com/'); 
+setupcodepanel(1, 'https://www.d3-graph-gallery.com/');
+setupcodepanel(2, 'https://liveweave.com/');
+setupcodepanel(3, 'https://webmakerapp.com/app/');
+
+</script>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 200000;">
+	<a href="https://f21dv.github.io"><img src="images/webhome.png" width="8%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 3px; left: 50px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href="?print-pdf" onclick="window.open(this.href, 'print window', 'width=1000,height=550').print(); return false"><img src="images/webprint.png" width="7.5%"></a>
+</div>	
+
+<!--
+<div style="display: block; position: absolute; bottom: 3px; left: 95px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="tts.ToggleSpeech();"><img src="./images/webtalk.png" width="7.5%"></a>
+</div>
+-->
+
+<div style="display: block; position: absolute; bottom: 5px; left: 95px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(0);"><img src="./images/webcode.png" width="6.8%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 140px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(1);"><img src="./images/webcode1.png" width="6.5%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 190px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(2);"><img src="./images/webcode2.png" width="6.5%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 240px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(3);"><img src="./images/webcode3.png" width="6.5%"></a>
+</div>
+
+	</body>
+</html>

@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Data Visualization and Analytics </title>
+
+	<link rel="shortcut icon" type="image/x-icon" href="./../../favicon.ico" />
+	<meta name="description" content="Creating beautiful interactive and engaging Data Visualization and Analytics">
+	<meta name="author" content="Ben Kenwright">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/reveal.css">
+	<link rel="stylesheet" href="./css/theme/white.css" id="theme">
+	
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="./lib/css/monokai.css">
+	
+	<link rel="stylesheet" href="./css/reveal-override.css"/>
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? './css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+<!-- Any section element inside of this container is displayed as a slide -->
+<div class="slides">
+
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-background="">
+	<h2>Simple Analytics</h2>
+	<h4>F20DV/F21DV Data Visualization and Analytics</h4>
+	<p>
+		<small>2020-2021</small>
+	</p>
+	
+<aside class='notes'>
+</aside>
+</section>
+
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-background-video="./images/intro3.mp4">
+<aside class='notes'>
+</aside>
+</section>
+
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		## Overview
+
+		* Simple Analytics: Filtering, Nests & Hierarchies
+		
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		### Array Filtering 
+
+* Array.filter(callback) creates a new array
+* The elements in the array are those where callback evaluates to true
+* callback is normally a reference to a function that takes the element under consideration as it's first argument and returns either true or false
+* Note this effects a shallow copy of filtered
+objects!
+  * if the original array is an array of objects, then the ‘new’ array is a filtered set of references to the original’s objects.
+		
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		## Array Filtering 
+
+* Difference between js array.filter() and
+d3.filter()
+  * Javascript creates elements for filtered data only
+  * D3 creates elements for all data from array and set elements empty for data not selected
+* Main difference is visible when inspecting elements in developer mode for Browser
+		
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		## The `d3.nest()` method
+		
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		## The `d3.nest()` method
+		
+* Nesting allows elements in an array to be
+grouped into a hierarchical tree structure
+* Similar to group by in SQL
+  * With multiple level of grouping
+  * Output is a tree instead of table/view
+* Groups data using keys and values
+* Levels in tree are specified by key functions
+
+[`d3.nest` Examples to Try](https://bl.ocks.org/phoebebright/raw/3176159/)
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		## Example of `d3.nest()` 
+		
+<pre><code class="stretch" style='line-height:1.0;font-size:70%;'>
+<script src="https://d3js.org/d3.v6.min.js"></script>  
+<script src="https://d3js.org/d3-collection.v1.min.js"></script>
+<script>
+	var cars = [
+		{ name: "car1", manufactured: "1950", model: "s51" },
+		{ name: "car1", manufactured: "1950", model: "s51" },
+		{ name: "car1", manufactured: "1951", model: "s50" },
+		{ name: "car1", manufactured: "1951", model: "s50" },
+	];
+	var groupedData = d3.nest()
+		.key(function (d) { return d.manufactured; })
+		.key(function (d) { return d.model; })
+		.entries(cars);
+	console.log("ArrayData :",    groupedData);
+	console.log("ArrayData[0] :", groupedData[0]);
+	console.log("ArrayData[1] :", groupedData[1]);
+</script>
+</code></pre>
+
+<img src='./images/d3nest.jpg' style='position:absolute;right:0;top:20px;'>
+
+Data is first grouped by manufacturing year and then by the model number.
+
+[Details Link](https://github.com/d3/d3-collection)
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		## `D3.nest.rollup()`
+		
+		With rollup, you provide a function that takes the array of values for each group and it produces a value based on that array. This provides for some very flexible group by functionality.
+		
+```js
+d3.nest()
+  .key(d=>d["Institution name"])
+  .rollup(v=>v.length)
+  .entries(dataModel.refEntries
+  .filter(d=>d.context.regionProvider == "SCOT")
+)
+```
+
+		[Link Details](http://learnjsdata.com/group_data.html)
+		
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		## `D3.nest.rollup with .filter`
+		
+Example 
+		
+```js
+d3.nest()
+  .key(d=>d["Institution name"])
+  .rollup(v=>v.length)
+  .entries(dataModel.refEntries
+  .filter(d=>d.context.regionProvider == "SCOT")
+)
+
+```
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	#### Applications of `d3.nest()` 
+	
+	* `d3.nest()` for hierarchies
+	* `d3.nest` with d3.tree layouts
+
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## Summary
+
+	* Manipulating and Filtering Data 
+	* `d3.nests`
+	
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## To do this week ...
+
+	* Read over the lectures 
+	* **Review** the revision questions 
+	* Work through tutorial practicals 
+	* Experiment (get into good habits) 
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+</div>
+
+</div>
+
+<script src="js/reveal.js"></script>
+
+<script>
+
+	// More info https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		center: true,
+		hash: true,
+
+		transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+		// More info https://github.com/hakimel/reveal.js#dependencies
+		dependencies: [
+			{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: 'plugin/highlight/highlight.js', async: true },
+			{ src: 'plugin/search/search.js', async: true },
+			{ src: 'plugin/zoom-js/zoom.js', async: true },
+			{ src: 'plugin/notes/notes.js', async: true },
+			{ src: 'plugin/tts/tts_min_reveal.js', async: false}
+		]
+	});
+
+</script>
+
+<script src='plugin/codepanel/codepanel.js'></script>
+<script>
+setupcodepanel(0, 'https://jsitor.com/'); 
+setupcodepanel(1, 'https://www.d3-graph-gallery.com/');
+setupcodepanel(2, 'https://liveweave.com/');
+setupcodepanel(3, 'https://webmakerapp.com/app/');
+
+</script>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 200000;">
+	<a href="https://f21dv.github.io"><img src="images/webhome.png" width="8%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 3px; left: 50px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href="?print-pdf" onclick="window.open(this.href, 'print window', 'width=1000,height=550').print(); return false"><img src="images/webprint.png" width="7.5%"></a>
+</div>	
+
+<!--
+<div style="display: block; position: absolute; bottom: 3px; left: 95px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="tts.ToggleSpeech();"><img src="./images/webtalk.png" width="7.5%"></a>
+</div>
+-->
+
+<div style="display: block; position: absolute; bottom: 5px; left: 95px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(0);"><img src="./images/webcode.png" width="6.8%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 140px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(1);"><img src="./images/webcode1.png" width="6.5%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 190px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(2);"><img src="./images/webcode2.png" width="6.5%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 240px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(3);"><img src="./images/webcode3.png" width="6.5%"></a>
+</div>
+
+	</body>
+</html>

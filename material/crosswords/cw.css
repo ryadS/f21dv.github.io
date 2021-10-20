@@ -1,0 +1,55 @@
+
+/*
+body{
+		
+	font-size: 20px;
+	font-family: 'Work Sans', sans-serif;
+	color: #333;
+  font-weight: 300;
+  //text-align: left;
+   // background-color: #f8f6f0;
+  background: url("../lectures/images/back.png");
+	//background-position: right 0% bottom 0%;
+	background-repeat: no-repeat;
+	background-size: contain;	
+	background-position: right bottom;
+}
+*/
+
+#crossword {
+    text-align:center;
+}
+
+.crossword {
+    border-collapse:collapse;
+    font-family:"Courier New", Courier, monospace;
+    margin-left:auto;
+    margin-right:auto;
+    clear:both;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.crossword td {
+    border:1px solid black;
+    padding:0;
+    margin:0;
+    vertical-align:middle;
+    padding:0;
+    text-align:center;
+    width:30px;
+    height:30px;
+}
+
+.crossword .no-border {
+    border:none;
+}
+
+#clues {
+    margin:auto;
+}
+
+#clues td {
+    vertical-align:top;
+}
+

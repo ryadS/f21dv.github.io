@@ -1,0 +1,74 @@
+<html>
+<head>
+
+<link rel="stylesheet" href="./quiz.css">
+<script src="./prettyprint/run_prettify.js"></script>
+
+</head>
+<body>
+
+<h1>Revision Quiz</h1>
+
+<button id="previous">Previous Question</button>
+<button id="next">Next Question</button>
+<button id="submit">Submit Quiz</button>
+<div id="results"></div>
+
+<div class="quiz-container">
+  <div id="quiz"></div>
+</div>
+
+<script>
+  const myQuestions = [
+    {
+      question: "How much is the total coursework component worth?",
+      answers: {
+        a: "40%",
+        b: "50%",
+        c: "60%",
+		d: "100%"
+      },
+      correctAnswer: "d"
+    },
+	{
+      question: "What is Git (i.e., as in GitHub)?",
+      answers: {
+        a: "Git is a web programming language",
+        b: "Git is a security system for online networks",
+		c: "Git is an open-source version control system"
+      },
+      correctAnswer: "c"
+    }
+	,
+    {
+      question: "The course is worth 15 credits - how many hours of study/learning time does this require of you over the semester:",
+      answers: {
+        a: "50  hours (4-5 hours a week)",
+        b: "100 hours (8-9 hours a week)",
+		c: "150 hours (12-13 hours a week)"
+      },
+      correctAnswer: "c",
+	  notes: `(see for details: <a target='_blank' href='https://www.hw.ac.uk/uk/services/docs/academic-registry/examdoc5.pdf'> Link</a>)`
+    }
+  ];
+</script>
+<script src="./quiz.js"></script>
+
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20; text-align: left;">
+        <a href="https://f28wp.github.io"><img src="../lectures/images/webhome.png" width="8%"></a>
+    </div>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326645-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-148326645-1');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Data Visualization and Analytics </title>
+
+	<link rel="shortcut icon" type="image/x-icon" href="./../../favicon.ico" />
+	<meta name="description" content="Creating beautiful interactive and engaging Data Visualization and Analytics">
+	<meta name="author" content="Ben Kenwright">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/reveal.css">
+	<link rel="stylesheet" href="./css/theme/white.css" id="theme">
+	
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="./lib/css/monokai.css">
+	
+	<link rel="stylesheet" href="./css/reveal-override.css"/>
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? './css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+<!-- Any section element inside of this container is displayed as a slide -->
+<div class="slides">
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-background="">
+	<h2>Hierarchies</h2>
+	<h4>F20DV/F21DV Data Visualization and Analytics</h4>
+	<p>
+		<small>2020-2021</small>
+	</p>
+	
+<aside class='notes'>
+</aside>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-background-video="./images/intro6.mp4">
+<aside class='notes'>
+</aside>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		## Overview
+
+* Hierarchical layout generators
+* Tree layouts
+* Pack layout
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		## 	Hierarchical Clustering
+* A hierarchy is a system where actors are
+ranked according to status
+* A method of grouping data by creating
+hierarchy of clusters
+* Two types:
+  * Agglomerative
+  * Divisive
+
+Link Details on [d3-hiearchy](https://github.com/d3/d3-hierarchy)
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	### Example Hierarchical data in JSON object
+
+	```json
+	{
+  "name": "Top Level",
+  "children": [
+    { 
+      "name": "Level 2: A",
+      "children": [
+        { "name": "Son of A" },
+        { "name": "Daughter of A" }
+      ]
+    },
+    { "name": "Level 2: B" }
+  ]
+}
+	```
+	
+	<img src='./images/treediagram.jpg' style='position:absolute;right:0px;bottom:0px;width:50%;'>
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	### `d3.hierarchy`
+
+	* `d3.hierarchy` provides a resource for loading and managing hierarchical data 
+	
+	* accessor methods, such as, root, children, descendants navigating hierarchy
+	
+	  * e.g., `root.children[0].data.name`
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	#### Example d3.hierarchy()
+	
+<pre><code class="stretch" style='line-height:1.0;font-size:70%;width:120%;margin-left:-10%;'>
+<div id="content"></div>
+<script src="https://d3js.org/d3.v6.min.js"></script>  
+<script>
+var data = { // input hierarchy data 
+  "name": "A1", "children": [
+              {
+                "name": "B1", "children": [
+                      { "name": "C1", "value": 100 },
+                      { "name": "C2", "value": 300 }
+                ]
+              },
+              { "name": "B2", "value": 200         }
+] };
+
+function showArrayElements(data, title) {
+  d3.select('#content')
+    .append('div')
+    .html('<span>' + title + '</span>: ' + data.map(function(d) {return d.data.name;}).join(', '))
+}
+
+function showLinkArrayElements(data, title) {
+  d3.select('#content')
+    .append('div')
+    .html('<span>' + title + '</span>: ' + data.map(function(d) {return d.source.data.name + ' -> ' + d.target.data.name;}).join(', '))
+}
+
+var root = d3.hierarchy(data) // *d3.hiearchy function which gets/organised data*
+
+var ancestors   = root.children[0].children[1].ancestors();
+var descendants = root.descendants();
+var leaves      = root.leaves();
+var path        = root.path(root.children[0].children[1]);
+var links       = root.links();
+
+showArrayElements(ancestors,    "root.children[0].children[1].ancestors()");
+showArrayElements(descendants,  "root.descendants()");
+showArrayElements(leaves,       "root.leaves()");
+showArrayElements(path,         "root.path(root.children[0].children[1])");
+showLinkArrayElements(links,    "root.links()");
+</script>
+</code></pre>
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## Summary
+
+	* Representing more complex hierarchical datasets
+	* Connecting data (parent-child configuration)
+	
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## To do this week ...
+
+	* Read over the lectures 
+	* **Review** the revision questions 
+	* Work through tutorial practicals 
+	* Experiment (get into good habits) 
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+</div>
+
+</div>
+
+<script src="js/reveal.js"></script>
+
+<script>
+
+	// More info https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		center: true,
+		hash: true,
+
+		transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+		// More info https://github.com/hakimel/reveal.js#dependencies
+		dependencies: [
+			{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: 'plugin/highlight/highlight.js', async: true },
+			{ src: 'plugin/search/search.js', async: true },
+			{ src: 'plugin/zoom-js/zoom.js', async: true },
+			{ src: 'plugin/notes/notes.js', async: true },
+			{ src: 'plugin/tts/tts_min_reveal.js', async: false}
+		]
+	});
+
+</script>
+
+<script src='plugin/codepanel/codepanel.js'></script>
+<script>
+setupcodepanel(0, 'https://jsitor.com/'); 
+setupcodepanel(1, 'https://www.d3-graph-gallery.com/');
+setupcodepanel(2, 'https://liveweave.com/');
+setupcodepanel(3, 'https://webmakerapp.com/app/');
+
+</script>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 200000;">
+	<a href="https://f21dv.github.io"><img src="images/webhome.png" width="8%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 3px; left: 50px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href="?print-pdf" onclick="window.open(this.href, 'print window', 'width=1000,height=550').print(); return false"><img src="images/webprint.png" width="7.5%"></a>
+</div>	
+
+<!--
+<div style="display: block; position: absolute; bottom: 3px; left: 95px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="tts.ToggleSpeech();"><img src="./images/webtalk.png" width="7.5%"></a>
+</div>
+-->
+
+<div style="display: block; position: absolute; bottom: 5px; left: 95px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(0);"><img src="./images/webcode.png" width="6.8%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 140px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(1);"><img src="./images/webcode1.png" width="6.5%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 190px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(2);"><img src="./images/webcode2.png" width="6.5%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 240px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(3);"><img src="./images/webcode3.png" width="6.5%"></a>
+</div>
+
+	</body>
+</html>

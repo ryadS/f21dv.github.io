@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Data Visualization and Analytics: Review and Support Lecture </title>
+
+		<link rel="shortcut icon" type="image/x-icon" href="./../../favicon.ico" />
+
+		<meta name="description" content="Data Visualization and Analytics creating beautiful interactive and engaging web pages - using client server side technologies - Review and Support Lecture ">
+		<meta name="author" content="Ben Kenwright">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="./css/reset.css">
+		<link rel="stylesheet" href="./css/reveal.css">
+		<link rel="stylesheet" href="./css/theme/white.css" id="theme">
+		
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="./lib/css/monokai.css">
+		
+		<link rel="stylesheet" href="./css/reveal-override.css"/>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? './css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>Review and Support Lecture</h2>
+					<h4>Data Visualization and Analytics</h4>
+					<p>
+						<small>2020-2021</small>
+					</p>
+				</section>
+				
+				<section data-background-video="./images/intro6.mp4">
+<aside class='notes'>
+</aside>
+				</section>
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Review Lecture & Support Lecture
+
+						* Questions
+						* Revision/Practice Exercises
+						
+					</textarea>
+				</section>
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What will the output be?
+						
+						```
+							const length = 4;
+							const numbers = [];
+							for (var i = 0; i < length; i++){
+							  numbers.push(i - 1);
+							}
+
+							console.log( numbers ); // => ???
+						```
+						* A: 0,1,2,3
+						* B: 3
+						* C: undefined
+						* D: -1
+						* E: -1, 0, 1, 2
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* **E**: -1, 0, 1, 2
+ 
+						
+						</textarea>
+					</section>
+				</section>	
+
+
+
+
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## To do this week ...
+
+						* Read over the lectures
+						* Review the revision questions 						
+						
+					</textarea>
+				</section>
+				
+
+			</div>
+
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true },
+					{ src: 'plugin/search/search.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+<script src='plugin/codepanel/codepanel.js'></script>
+<script>
+setupcodepanel(0, 'https://jsitor.com/'); 
+setupcodepanel(1, 'https://www.d3-graph-gallery.com/');
+setupcodepanel(2, 'https://liveweave.com/');
+setupcodepanel(3, 'https://webmakerapp.com/app/');
+
+</script>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 200000;">
+	<a href="https://f21dv.github.io"><img src="images/webhome.png" width="8%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 3px; left: 50px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href="?print-pdf" onclick="window.open(this.href, 'print window', 'width=1000,height=550').print(); return false"><img src="images/webprint.png" width="7.5%"></a>
+</div>	
+
+<!--
+<div style="display: block; position: absolute; bottom: 3px; left: 95px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="tts.ToggleSpeech();"><img src="./images/webtalk.png" width="7.5%"></a>
+</div>
+-->
+
+<div style="display: block; position: absolute; bottom: 5px; left: 95px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(0);"><img src="./images/webcode.png" width="6.8%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 140px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(1);"><img src="./images/webcode1.png" width="6.5%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 190px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(2);"><img src="./images/webcode2.png" width="6.5%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 240px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(3);"><img src="./images/webcode3.png" width="6.5%"></a>
+</div>
+
+	</body>
+</html>

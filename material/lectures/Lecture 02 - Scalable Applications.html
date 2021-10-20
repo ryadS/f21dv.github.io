@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Data Visualization and Analytics </title>
+
+	<link rel="shortcut icon" type="image/x-icon" href="./../../favicon.ico" />
+	<meta name="description" content="Creating beautiful interactive and engaging Data Visualization and Analytics">
+	<meta name="author" content="Ben Kenwright">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/reveal.css">
+	<link rel="stylesheet" href="./css/theme/white.css" id="theme">
+	
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="./lib/css/monokai.css">
+	
+	<link rel="stylesheet" href="./css/reveal-override.css"/>
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? './css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+<!-- Any section element inside of this container is displayed as a slide -->
+<div class="slides">
+
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-background="">
+	<h2>Scalable Applications</h2>
+	<h4>F20DV/F21DV Data Visualization and Analytics</h4>
+	<p>
+		<small>2020-2021</small>
+	</p>
+	
+<aside class='notes'>
+</aside>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-background-video="./images/intro3.mp4">
+<aside class='notes'>
+</aside>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		## Overview
+
+		* Model View Presenter (**MVP**) pattern
+		* **Encapsulation** (Cheating at Classes)
+		* Step by Step **Examples**
+		* D3 Survival (Best Practices)
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-background="images/designpattern.jpg">
+	<div id="white">
+	<h2 style="color:black">What is a Design Pattern?</h2>
+	</div>
+<aside class='notes'>
+</aside>
+</section>
+		
+<!-- ------------------------------------------------------------- -->
+
+		
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		## What is a Design Pattern?
+
+		Design patterns build on core OOP concepts:
+		* **Abstraction** – Concentrates on only the outside view, i.e. the
+		interface
+		* **Encapsulation** – Combining the data and actions of objects
+		into a single item, i.e. a class
+		* **Inheritance** – Common features in superclass, subclasses
+		inherit and extend these features
+		* **Polymorphism** – Ability of objects to respond, each in its own
+		way, to the same message
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+		
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		## What is a Design Pattern?
+
+		* A **general solution** to a **common problem** in software design
+		(but not an implementation in itself)
+		* Best practices of experienced object-oriented software developers
+		* Note that a pattern can never be transformed directly into code. It needs to be tailored to a specific problem.
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-background="images/whyusepatterns.jpg">
+	<div id="white">
+	<h2 style="color:black">## Why use Design Patterns?</h2>
+	</div>
+<aside class='notes'>
+</aside>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+	
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		## Why use Design Patterns?
+
+		* Maximise **code reuse**
+		* Minimise re-implementation
+		* Increase cohesion
+		* Reduce coupling
+		* Patterns can increase **complexity**
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		### Model View Presenter (**MVP**) Pattern
+
+		* MVP is an architectural pattern derived from MVC (Model-View-Controller)
+		* MVP focuses on improving presentation logic
+		* MVP is decoupling of different aspects in the code
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+		### Use CSS to separate styling
+
+		* Separating out presentation styles for different views in CSS files
+		* Take advantage of CSS classes (controling interface)
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;" data-background="#f9dc24">
+<textarea data-template>
+	## Encapsulation: Cheating at Classes
+
+<aside class='notes'>
+</aside>
+
+</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+### Object factory in **JS**
+* A **function** that **returns** an **object**
+* Use Factory functions to **imitate** `classes`
+* Factory function has:
+  * Public and private functions
+  * Public and private variables
+* Provide encapsulation of objects and variables
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+### Object factory in **JS**
+
+A **factory function** is any function which is not a class or constructor that returns a (presumably new) object. 
+In JavaScript, **any function can return an object**. When it does so without the **new keyword**, it's a factory function.
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+### Object Factory Example
+
+```js
+const Table = function( name, network ) {
+    let obj     = {};
+    obj.network = network || 0;
+    obj.name    = name || "";
+    obj.details = function(){ return (obj.name + ',' + obj.network); };
+    return obj;
+};
+let t0 = Table('test',  'fast');
+let t1 = Table('check', 'slow');
+console.log( t0.details() );
+console.log( t1.details() );
+```
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+<section>
+	<section data-markdown data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+		<textarea data-template>
+		## Revision Question
+		What will the console output for the following:
+		
+		```js
+const Check = function( name ) {
+    obj         = {};
+    obj.name    = name || "";
+    obj.details = function(){ return (obj.name); };
+    return obj;
+};
+let c0 = Check('fast');
+let c1 = Check('slow');
+console.log( c0.details() );
+console.log( c1.details() );
+```
+
+		* a) fast  slow
+		* b) slow  fast
+		* c) fast  fast 
+		* d) slow  slow
+<aside class='notes'>
+</aside>
+		</textarea>
+	</section>
+	
+	<section data-markdown data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+		<textarea data-template>
+		## Answer
+		
+		Answer: **d) slow  slow**
+
+		* Note the 'typo' error (missing 'let') so the variable is added to 'global' scope
+<aside class='notes'>
+</aside>
+		</textarea>
+	</section>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+### Object Factory Points
+
+* Local variables (not returned) are used to emulate private variables, functions and constructor code
+* Function can return the object itself to emulate 'chaining'
+* Override and pass around methods (i.e., treat them like variables)
+
+> One function to rule them all
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+### D3 Example Object Factory (Class)
+
+<pre><code class="stretch" style='line-height:1.0;font-size:70%'>
+<style>
+.chart div {
+  background-color: green;
+  padding: 3px;
+  margin: 2px;
+}
+</style>
+<div class="chart"></div>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script>
+// factory
+function chart()
+{
+  let obj     = {};     // class
+  let objdata = null;   // private variable
+  // public accesors
+  obj.setdata = function( d ) { objdata=d; }
+
+  obj.update = function() {
+    d3.select(".chart")
+      .selectAll("div")
+      .data(objdata)
+      .join()
+      .append("div")
+      .style("width", function(d) { return d + "px"; } );
+  }
+  return obj;
+}
+
+let c = chart();
+c.setdata( [30, 86, 168, 281, 303, 365] );
+c.update(); 
+</script>
+</code></pre>
+
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+### Extending the Example to provide **Simple Interaction**
+
+```css
+<style>
+.chart div {
+  background-color: green;
+  padding: 3px;
+  margin: 2px;
+}
+.chart div:hover {
+  background-color: blue;
+}
+</style>
+```
+
+You defined in the CSS style, how you want the visual element to react when the mouse hovers over it (e.g., change the color or transparency).
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+<!-- ------------------------------------------------------------- -->
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+### Different Classes for Different Data
+
+Also explicitly change the CSS class using `d3.classed()` method
+
+```css
+<style>
+.chart div {
+  background-color: green;
+  padding: 3px;
+  margin: 2px;
+}
+div .highlight {
+  background-color: blue;
+}
+</style>
+```
+
+```js 
+.classed("highlight", true) // always add highlight class 
+```
+
+Drive the highlighting from data model
+```js
+.classed("highlight", d=>{ return d.highlight }) // only add if true
+```
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+<!-- ------------------------------------------------------------- -->
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+### D3 Example (Highlighting data from model)
+
+<pre><code class="stretch" style='line-height:1.0;font-size:70%'>
+<style>
+.chart div {
+  background-color: green;
+  padding: 3px;
+  margin: 2px;
+}
+div .highlight {
+  background-color: blue;
+}
+</style>
+<div class="chart"></div>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script>
+let dataset = [ 
+  { 'name': 'a', 'val':20,  'highlight':false },
+  { 'name': 'b', 'val':100, 'highlight':false },
+  { 'name': 'c', 'val':50,  'highlight':true  }
+]
+    d3.select(".chart")
+      .selectAll("div")
+      .data(dataset)
+      .join()
+      .append("div")
+      .classed("highlight", d=>{ return d.highlight } )
+      .style("width", function(d) { return d.val + "px"; } );
+</script>
+</script>
+</code></pre>
+
+Try the following example (change the highlight boolean values).
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## Exercise
+
+	* Try creating 'two' barchars that are both shown at the same time
+	* Both contain same size of data (but with different values)
+	* When the mouse hovers over one data element in one barchart (you need to highlight 'both' barchart elements - to see and compare corresponding values)
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## Sorting the data
+
+	* `array.sort() method`
+	
+	Example 
+	```js 
+let a = [1,5,2,6,10,6];
+console.log( a ); // [[1,5,2,6,10,6]]
+
+a.sort(function(a, b){return a-b}); // overwrites the original array.
+
+console.log( a ); // [[1,2,5,6,6,10]]
+	```
+	
+	**Important** if you want to sort then return to the unsorted data you need a separate array for the sorted data (as sorting overwrites the original array)
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## Toplevel design
+
+	* Take high level view 
+	* Model View Presenter (MVP) pattern 
+	* Manage data/classes/visualization (good coding practices)
+	* Encapsulate/orangise data and visual elements 
+	  * Functions are popular approach in JS for managing/grouping data and functionality
+	* Extending to provide simple interaction
+	* Customize the interative options/view based on the data
+	
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	### D3 survival
+
+* Prepare for the labs each week!!!
+* Save versions constantly!!!!
+* 'Inspect' the html/svg output to see what you are generating (use classes and id to help you know what is
+what)
+* Get to know the browser development tools Ctrl shift I in
+Chrome
+* `"use strict;"` (will catch unintentional global declarations)
+* Test every new line you write in the browser
+* Use `console.log()`
+* Watch the ";" in chained .methods()
+* Use breakpoints with the browser's debugger
+* If the error is caught deep in d3.js then use a stack trace
+
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+<!-- ------------------------------------------------------------- -->
+
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	### Patterns & Encapsulation
+
+* Use the GUP even if you think that you just need the
+enter selection
+* Use MVP encapsulation pattern for development and
+testing
+* Use globals sparingly (hide in functions as in MVP)
+* Encapsulate (using d3 functional style or other
+encapsulation method)
+* Note that `{block structure}` does not control scope of
+`var` variables (functional scope)
+* Override functions using public methods to customise
+object behaviour
+
+
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	### Functions
+
+* Remember that variables arguments may be
+functions and these are not denoted by `( )`
+* Watchout for the round brackets `()` in a
+function call (missing out the brackets is very
+easy to do if there are no arguments and
+Javascript will then return a reference to the
+function rather than execute it!)
+* Note that javascript ‘assignments’ pass
+references!!!
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	### Other
+
+* When looking at examples check d3 version (they are
+not compatible) - e.g. v4,v5,v6,v7
+* Watch that what you "select" matches what you
+"append"!!!
+* Watch out for selecting DOM elements already in the
+document that you have forgotten about!
+* Avoid both of the above by using dedicated classes and
+groups to "select" "selections" (see `d3.classed()` )
+* Uses styles in preference to attributes (e.g. fill colour)
+and use classes in preference to styles
+* Remember that Javascript assignments are shallow (i.e.
+by reference)
+
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## Summary
+
+	* Developing web-based solutions 
+	* Encapsulation (extendable/flexible patterns) 
+	* Data and the correponding 'visual' aspects 
+	* Managing interactive aspects
+	
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## To do this week ...
+
+	* Read over the lectures 
+	* **Review** the revision questions 
+	* Work through examples
+	* Experiment and try different configurations/effects
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- ------------------------------------------------------------- -->
+
+
+</div>
+
+</div>
+
+<script src="js/reveal.js"></script>
+
+<script>
+
+	// More info https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		center: true,
+		hash: true,
+
+		transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+		// More info https://github.com/hakimel/reveal.js#dependencies
+		dependencies: [
+			{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: 'plugin/highlight/highlight.js', async: true },
+			{ src: 'plugin/search/search.js', async: true },
+			{ src: 'plugin/zoom-js/zoom.js', async: true },
+			{ src: 'plugin/notes/notes.js', async: true },
+			{ src: 'plugin/tts/tts_min_reveal.js', async: false}
+		]
+	});
+
+</script>
+
+<script src='plugin/codepanel/codepanel.js'></script>
+<script>
+setupcodepanel(0, 'https://jsitor.com/'); 
+setupcodepanel(1, 'https://www.d3-graph-gallery.com/');
+setupcodepanel(2, 'https://liveweave.com/');
+setupcodepanel(3, 'https://webmakerapp.com/app/');
+
+</script>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 200000;">
+	<a href="https://f21dv.github.io"><img src="images/webhome.png" width="8%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 3px; left: 50px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href="?print-pdf" onclick="window.open(this.href, 'print window', 'width=1000,height=550').print(); return false"><img src="images/webprint.png" width="7.5%"></a>
+</div>	
+
+<!--
+<div style="display: block; position: absolute; bottom: 3px; left: 95px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="tts.ToggleSpeech();"><img src="./images/webtalk.png" width="7.5%"></a>
+</div>
+-->
+
+<div style="display: block; position: absolute; bottom: 5px; left: 95px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(0);"><img src="./images/webcode.png" width="6.8%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 140px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(1);"><img src="./images/webcode1.png" width="6.5%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 190px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(2);"><img src="./images/webcode2.png" width="6.5%"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 240px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="togglecodepanel(3);"><img src="./images/webcode3.png" width="6.5%"></a>
+</div>
+
+	</body>
+</html>
