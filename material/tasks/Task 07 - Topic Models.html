@@ -23,7 +23,7 @@ These tasks provide an opportunity for you to try out and experiment with the D3
 
 # LDA (Latent Dirichlet allocation)
 
-Latent Dirichlet allocation (LDA) topic modeling in javascript for node.js. LDA is a machine learning algorithm that extracts topics and their related keywords from a collection of documents. 
+LDA is a machine learning algorithm that extracts topics and their related keywords from a collection of documents. This example will take the Latent Dirichlet allocation (LDA) topic modelling algorithm and implement it in JavasSript (practical insights). 
 
 In LDA, a document may contain several different topics, each with their own related terms. The algorithm uses a probabilistic model for detecting the number of topics specified and extracting their related keywords. For example, a document may contain topics that could be classified as beach-related and weather-related. The beach topic may contain related words, such as sand, ocean, and water. Similarly, the weather topic may contain related words, such as sun, temperature, and clouds.
 
@@ -166,7 +166,7 @@ Output for the above script:
 **Exercise:** After you're comfortable with the idea of the LDA algorithm, try loading in data (e.g., large text file or tweats and processing the data - removing non-ascii characters, tidying text and organising the data for processing).
 
 
-Remember, you've got the D3 AJAX methods for loading data/text in:
+Remember, you've got the D3 AJAX methods for loading data in from an external source (e.g., txt file, instead of embedding the text inside the JavaScript file):
 ```js
 d3.text("somefile.txt", func(..))
 ```
@@ -179,7 +179,7 @@ Take a look at the following minimal working example, it generates a circle pack
 
 <div style='text-align:center;' class="example2"></div>
 
-Here is the complete source code for the working bubble example. 
+Here is the complete source code for the chart shown above. 
 
 ```js
 <!DOCTYPE html>
@@ -264,7 +264,7 @@ console.log('done ...');
 
 ---
 
-# Example Visualizing LDA Data 
+# Example 'Visualizing' LDA Data 
 This example, combining the LDA algorithm with the D3 circle packing chart (visualize the LDA topics/words).
 
 
@@ -272,7 +272,7 @@ This example, combining the LDA algorithm with the D3 circle packing chart (visu
 
 **Exercise:** As an exercise try bringing together the LDA example and the Circle Packing Chart to create a visualization output similar to that shown above.
 
-> **Hint** Have the LDA part of the code build .json structure, which can be exported or passed to the second part (visualization chart).
+> **Hint** Have the LDA part of the code build .json structure, which can be passed (or exported to a json file) before being passed to the chart (visualization chart).
 
 
 </textarea>
