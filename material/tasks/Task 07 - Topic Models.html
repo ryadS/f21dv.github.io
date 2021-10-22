@@ -1,0 +1,562 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Data Visualization and Analytics</title>
+  <link rel="stylesheet" href="./md2html/theme.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.7.2/showdown.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/go.min.js"></script>
+
+</head>
+<body>
+  <div id="content"></div>
+  <textarea id="input" style='display:none'>
+
+# Lab - Topic Models
+
+These tasks provide an opportunity for you to try out and experiment with the D3 features (e.g., custimizing and modifying basic examples to specific problems and data sets).
+
+
+# LDA (Latent Dirichlet allocation)
+
+Latent Dirichlet allocation (LDA) topic modeling in javascript for node.js. LDA is a machine learning algorithm that extracts topics and their related keywords from a collection of documents. 
+
+In LDA, a document may contain several different topics, each with their own related terms. The algorithm uses a probabilistic model for detecting the number of topics specified and extracting their related keywords. For example, a document may contain topics that could be classified as beach-related and weather-related. The beach topic may contain related words, such as sand, ocean, and water. Similarly, the weather topic may contain related words, such as sun, temperature, and clouds.
+
+See http://en.wikipedia.org/wiki/Latent_Dirichlet_allocation
+
+
+
+```
+<!DOCTYPE html>
+<!--
+Latent Dirichlet allocation (LDA) topic modeling in javascript
+
+see: http://en.wikipedia.org/wiki/Latent_Dirichlet_allocation
+
+Implementation References:
+* Based on original javascript implementation https://github.com/awaisathar/lda.js
+* NPM Library https://www.npmjs.com/package/lda
+-->
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+<script src='https://cdn.rawgit.com/awaisathar/lda.js/gh-pages/js/stopwords.js'></script>
+<script src='https://cdn.rawgit.com/awaisathar/lda.js/gh-pages/js/lda.js'></script>
+
+<script>
+// Example document.
+var text = 'Cats are small. Dogs are big. Cats like to chase mice. Dogs like to eat bones.';
+ 
+
+// Extract sentences and builds vocab
+var documents = new Array();
+var sentences = [ text ];
+var f = {};
+var vocab=new Array();
+var docCount=0;
+for(var i=0;i<sentences.length;i++) {
+  if (sentences[i]=="") continue;
+  var words = sentences[i].split(/[\s,\"]+/);
+  if(!words) continue;
+  var wordIndices = new Array();
+  for(var wc=0;wc<words.length;wc++) {
+    var w=words[wc].toLowerCase().replace(/[^a-z\'A-Z0-9 ]+/g, '');
+    //TODO: Add stemming
+    if (w=="" || w.length==1 || stopwords[w] || w.indexOf("http")==0) continue;
+    if (f[w]) { 
+      f[w]=f[w]+1;      
+    } 
+    else if(w) { 
+      f[w]=1; 
+      vocab.push(w); 
+    };  
+    wordIndices.push(vocab.indexOf(w));
+  }
+  if (wordIndices && wordIndices.length>0) {
+    documents[docCount++] = wordIndices;
+  }
+}
+
+console.log('vocab:',     vocab );
+console.log('documents:', documents );
+
+// Run LDA to get terms for 2 topics
+var V     = vocab.length;
+var M     = documents.length;
+var K     = 2;    // number of topics 
+var alpha = 0.1;  // per-document distributions over topics
+var beta  = .01;  // per-topic distributions over words
+
+lda.configure(documents,V,10000, 2000, 100, 10);
+lda.gibbs(K, alpha, beta);
+
+var theta = lda.getTheta();
+var phi   = lda.getPhi();
+
+console.log( 'number of topics:', phi.length ); 
+
+// build topic word lists
+let topics = [];
+//topics
+var topTerms=20; // max topics
+var topicText = new Array();
+for (var k = 0; k < phi.length; k++) {
+  var tuples = new Array();
+  for (var w = 0; w < phi[k].length; w++) {
+     tuples.push(""+phi[k][w].toPrecision(2)+"_"+vocab[w]);
+  }
+
+  tuples.sort().reverse();
+  if(topTerms>vocab.length) topTerms=vocab.length;
+
+  for (var t = 0; t < topTerms; t++) 
+  {
+    var topicTerm=tuples[t].split("_")[1];
+    var prob=parseInt(tuples[t].split("_")[0]*100);
+    if (prob<0.0001) continue;
+      
+    console.log("topic "+k+": "+ topicTerm+" = " + prob  + "%");
+
+    if ( topics[k] == undefined ) topics[k] = []; 
+    topics[k].push( topicTerm );
+  }
+}
+
+console.log( 'topics:', topics );
+</script>
+```
+
+Output for the above script:
+```
+["vocab:",["cats","small","dogs","big","chase","mice","eat","bones"]]
+["documents:",[[0,1,2,3,0,4,5,2,6,7]]]
+["number of topics:",2]
+["topic 0: cats = 19%"]
+["topic 0: dogs = 16%"]
+["topic 0: small = 11%"]
+["topic 0: mice = 11%"]
+["topic 0: eat = 11%"]
+["topic 0: chase = 11%"]
+["topic 0: bones = 11%"]
+["topic 0: big = 10%"]
+["topic 1: dogs = 21%"]
+["topic 1: cats = 18%"]
+["topic 1: small = 10%"]
+["topic 1: mice = 10%"]
+["topic 1: eat = 10%"]
+["topic 1: bones = 10%"]
+["topic 1: big = 10%"]
+["topic 1: chase = 9%"]
+["topics:",[["cats","dogs","small","mice","eat","chase","bones","big"],
+            ["dogs","cats","small","mice","eat","bones","big","chase"]]]
+```
+
+---
+
+
+**Exercise:** As an exercise, try modifying the simple LDA example for different texts and numbers of topics. 
+
+
+
+**Exercise:** After you're comfortable with the idea of the LDA algorithm, try loading in data (e.g., large text file or tweats and processing the data - removing non-ascii characters, tidying text and organising the data for processing).
+
+
+Remember, you've got the D3 AJAX methods for loading data/text in:
+```js
+d3.text("somefile.txt", func(..))
+```
+
+
+# Example Circle Pack Hierarchy Chart using D3
+
+Take a look at the following minimal working example, it generates a circle pack chart based on the hierarchical JSON data provided.
+
+
+<div style='text-align:center;' class="example2"></div>
+
+Here is the complete source code for the working bubble example. 
+
+```js
+<!DOCTYPE html>
+<style>
+circle {
+  fill: rgb(31, 119, 180);
+  fill-opacity: .25;
+  stroke: rgb(31, 119, 180);
+  stroke-width: 1px;
+}
+
+.leaf circle {
+  fill: #ff7f0e;
+  fill-opacity: 1;
+}
+
+text {
+  font: 10px sans-serif;
+}
+</style>
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script>
+var w = 300;
+var h = 300;
+
+var pack = d3.pack() 
+             .size([w - 4, h - 4])
+             .padding( 2 );
+
+var svg = d3.select("body")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+
+var json = {
+ "name": "flare",
+ "children": [
+  {
+   "name": "analytics",
+   "children": [
+    {
+     "name": "cluster",
+     "children": [
+      {"name": "AgglomerativeCluster", "size": 3938},
+      {"name": "CommunityStructure", "size": 3812},
+      {"name": "HierarchicalCluster", "size": 6714},
+      {"name": "MergeEdge", "size": 743}
+     ]
+    }]
+  }
+ ]
+};
+
+
+var root = d3.hierarchy( json )
+      .sum(function(d) { return d.size; })
+      .sort(function(a, b) { return b.size - a.size; });
+
+let g = svg.append("g");
+
+var node = g.selectAll(".node")
+            .data(pack(root).descendants())
+            .enter().append("g")
+            .attr("class",     function(d) { return d.children ? "node" : "leaf node";    })
+            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+node.append("circle")
+    .attr("r", function(d) { return d.r; });
+
+node.filter(function(d) { return !d.children; }).append("text")
+    .attr("dy", "0.3em")
+    .text(function(d) { return d.data.name.substring(0, d.r / 3); });
+
+
+console.log('done ...');
+</script>
+```
+
+**Exercise:** Try modifying the example source data (json), customize the appearance (random colors/borders).
+
+
+---
+
+# Example Visualizing LDA Data 
+This example, combining the LDA algorithm with the D3 circle packing chart (visualize the LDA topics/words).
+
+
+<div style='text-align:center;' class="example3"></div>
+
+**Exercise:** As an exercise try bringing together the LDA example and the Circle Packing Chart to create a visualization output similar to that shown above.
+
+> **Hint** Have the LDA part of the code build .json structure, which can be exported or passed to the second part (visualization chart).
+
+
+</textarea>
+  
+<br><br>
+  
+
+
+
+
+
+
+<script>
+
+   //function htmlEntities(str) {
+   //   return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+   //}
+
+	let eleminput = document.getElementById('input')
+	//let txt = elem.innerHTML;
+	//txt = htmlEntities( txt );
+	//elem.innerHTML = txt;
+	
+    elem = document.getElementById('content')
+    converter = new showdown.Converter();
+    elem.innerHTML = converter.makeHtml(eleminput.value)
+    
+	hljs.initHighlightingOnLoad();
+</script>
+<!--
+  <script src="https://yihui.name/js/math-code.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+-->
+  
+<div id="myhome" style="z-index: auto; display: block; position: fixed; bottom: 5px; left: 5px;">
+    <a href="https://f21dv.github.io" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+</div>
+
+
+<!-- ------------------------------------------------------------------ -->
+
+<!-- EXAMPLE 2 -->
+
+<style>
+circle {
+  fill: rgb(31, 119, 180);
+  fill-opacity: .25;
+  stroke: rgb(31, 119, 180);
+  stroke-width: 1px;
+}
+
+.leaf circle {
+  fill: #ff7f0e;
+  fill-opacity: 1;
+}
+
+text {
+  font: 10px sans-serif;
+}
+</style>
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script>
+
+
+var w = 300;
+var h = 300;
+
+var pack = d3.pack() 
+             .size([w - 4, h - 4])
+             .padding( 2 );
+
+var svg = d3.select(".example2")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+
+var json2 = {
+ "name": "flare",
+ "children": [
+  {
+   "name": "analytics",
+   "children": [
+    {
+     "name": "cluster",
+     "children": [
+      {"name": "AgglomerativeCluster", "size": 3938},
+      {"name": "CommunityStructure", "size": 3812},
+      {"name": "HierarchicalCluster", "size": 6714},
+      {"name": "MergeEdge", "size": 743}
+     ]
+    }]
+  }
+ ]
+};
+
+
+var root = d3.hierarchy( json2 )
+      .sum(function(d) { return d.size; })
+      .sort(function(a, b) { return b.size - a.size; });
+
+var g2 = svg.append("g");
+
+var node = g2.selectAll(".node")
+            .data(pack(root).descendants())
+            .enter().append("g")
+            .attr("class",     function(d) { return d.children ? "node" : "leaf node";    })
+            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+node.append("circle")
+    .attr("r", function(d) { return d.r; });
+
+node.filter(function(d) { return !d.children; }).append("text")
+    .attr("dy", "0.3em")
+    .text(function(d) { return d.data.name.substring(0, d.r / 3); });
+
+</script>
+
+<!-- ------------------------------------------------------------------ -->
+
+<!-- EXAMPLE 3 -->
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+<script src='https://cdn.rawgit.com/awaisathar/lda.js/gh-pages/js/stopwords.js'></script>
+<script src='https://cdn.rawgit.com/awaisathar/lda.js/gh-pages/js/lda.js'></script>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+
+<style>
+circle {
+  fill: rgb(31, 119, 180);
+  fill-opacity: .25;
+  stroke: rgb(31, 119, 180);
+  stroke-width: 1px;
+}
+
+.leaf circle {
+  fill: #ff7f0e;
+  fill-opacity: 1;
+}
+
+text {
+  font: 10px sans-serif;
+}
+</style>
+
+<script>
+// Example document.
+var text = 'Cats are small. Dogs are big. Cats like to chase mice. Dogs like to eat bones.';
+ 
+
+// Extract sentences and builds vocab
+var documents = new Array();
+var sentences = [ text ];
+var f = {};
+var vocab=new Array();
+var docCount=0;
+for(var i=0;i<sentences.length;i++) {
+  if (sentences[i]=="") continue;
+  var words = sentences[i].split(/[\s,\"]+/);
+  if(!words) continue;
+  var wordIndices = new Array();
+  for(var wc=0;wc<words.length;wc++) {
+    var w=words[wc].toLowerCase().replace(/[^a-z\'A-Z0-9 ]+/g, '');
+    //TODO: Add stemming
+    if (w=="" || w.length==1 || stopwords[w] || w.indexOf("http")==0) continue;
+    if (f[w]) { 
+      f[w]=f[w]+1;      
+    } 
+    else if(w) { 
+      f[w]=1; 
+      vocab.push(w); 
+    };  
+    wordIndices.push(vocab.indexOf(w));
+  }
+  if (wordIndices && wordIndices.length>0) {
+    documents[docCount++] = wordIndices;
+  }
+}
+
+console.log('vocab:',     vocab );
+console.log('documents:', documents );
+
+// Run LDA to get terms for 2 topics
+var V     = vocab.length;
+var M     = documents.length;
+var K     = 2;    // number of topics 
+var alpha = 0.1;  // per-document distributions over topics
+var beta  = .01;  // per-topic distributions over words
+
+lda.configure(documents,V,10000, 2000, 100, 10);
+lda.gibbs(K, alpha, beta);
+
+var theta = lda.getTheta();
+var phi   = lda.getPhi();
+
+console.log( 'number of topics:', phi.length ); 
+
+// build topic word lists
+let topics = [];
+//topics
+var topTerms=20; // max topics
+var topicText = new Array();
+for (var k = 0; k < phi.length; k++) {
+  var tuples = new Array();
+  for (var w = 0; w < phi[k].length; w++) {
+     tuples.push(""+phi[k][w].toPrecision(2)+"_"+vocab[w]);
+  }
+
+  tuples.sort().reverse();
+  if(topTerms>vocab.length) topTerms=vocab.length;
+
+  for (var t = 0; t < topTerms; t++) 
+  {
+    var topicTerm=tuples[t].split("_")[1];
+    var prob=parseInt(tuples[t].split("_")[0]*100);
+    if (prob<0.0001) continue;
+      
+    console.log("topic "+k+": "+ topicTerm+" = " + prob  + "%");
+
+    if ( topics[k] == undefined ) topics[k] = {"name":topicTerm, "children":[]}; 
+    else topics[k].children.push( { 'name': topicTerm, 'size':prob*100 } );
+  }
+}
+
+console.log( 'topics:', topics );
+
+let json = { 'name': 'root',
+             'children': topics };
+
+// you could save out the processed data - load it for 
+// visualizing later (e.g., JSON.stringify(..) )
+
+// -----------------------------------------------
+
+
+var w = 300;
+var h = 300;
+
+var pack = d3.pack() 
+    .size([w - 4, h - 4])
+    .padding( 2 );
+
+var svg = d3.select(".example3")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+
+var root = d3.hierarchy( json )
+      .sum(function(d) { return d.size; })
+      .sort(function(a, b) { return b.size - a.size; });
+
+let g = svg.append("g");
+
+var node = g.selectAll(".node")
+            .data(pack(root).descendants())
+            .enter().append("g")
+            .attr("class", function(d) { return d.children ? "node" : "leaf node"; })
+            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+node.append("circle")
+    .attr("r", function(d) { return d.r; });
+
+node.filter(function(d) { return !d.children; }).append("text")
+    .attr("dy", "0.3em")
+    .text(function(d) { return d.data.name.substring(0, d.r / 3); });
+
+
+console.log('ready...');
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

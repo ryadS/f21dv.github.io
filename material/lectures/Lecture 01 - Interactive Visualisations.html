@@ -183,6 +183,59 @@ Example of Geo-Trace program to visualize web communication packets
 </section>
 
 <!-- -------------------------------------------------------------------- -->
+	
+	
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## D3 Example
+	
+	* Let's Look at a Simple D3 Example
+	* Traditional **Hello World**
+	
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+	
+	
+
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+	## D3: Hello, world!
+	
+<pre><code class="stretch"><! DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script>
+
+d3.select("body").append("h1")
+    .text("Hello, world!")
+    .style("text-align", "center")
+    .style("line-height", "320px")
+    .style("font-size", "100px")
+    .style("transform", "rotate(-180deg) scale(0.001, 0.001)")
+  .transition()
+    .duration(1500)
+    .style("transform", null);
+</script>
+</code></pre>
+	
+Give the example a try, run the code and see what happens ...
+<small>(Complete minimal working example)</small>
+
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+
+<!-- -------------------------------------------------------------------- -->
+
+
 
 <section data-markdown style="text-align: left;">
 	<textarea data-template>
@@ -206,6 +259,26 @@ Example of Geo-Trace program to visualize web communication packets
 	</textarea>
 </section>
 
+
+<!-- -------------------------------------------------------------------- -->
+	
+<section data-markdown style="text-align: left;">
+	<textarea data-template>
+
+	## Some things to try...
+	
+	Before continuing, try modifying the 'D3 Hello World Example' to include:
+	* Color of the text red 
+	* Make the 'spin-in' effect slower (takes twice as long)
+	* Change the font to 'Cursive' (i.e., font-family)
+	* Modify the transition effect so the text spins-in, then wait 2 seconds, and transitions out (text spins-out and gets smaller then disapears)
+<aside class='notes'>
+</aside>
+	</textarea>
+</section>
+
+<!-- -------------------------------------------------------------------- -->
+
 <!-- -------------------------------------------------------------------- -->
 		
 
@@ -213,12 +286,14 @@ Example of Geo-Trace program to visualize web communication packets
 	
 </section>
 
+
+
 <!-- -------------------------------------------------------------------- -->
 	
 <section data-markdown style="text-align: left;">
 	<textarea data-template>
 
-	## Minimum Working D3 Example
+	## Minimum Working D3 Example (SVG)
 	
 ```js
 <script src="https://d3js.org/d3.v6.min.js"></script>
@@ -340,9 +415,9 @@ Try out the example, what is the outputs?
 <section data-markdown style="text-align: left;">
 	<textarea data-template>
 
-	## Join (Enter - Update - Exit)
+	### Join (Enter - Update - Exit)
 	
-```js
+<pre><code class='stretch'>
 <script src="https://d3js.org/d3.v6.min.js"></script>
 <svg viewBox="0 -20 200 200">
 <script>
@@ -359,10 +434,11 @@ svg.selectAll("text")        // only be 1 (as only single text element)
 	   function(exit)   { console.log('exit called');   } 
 	);
 </script>
-```
+</code></pre>
+
 **selection.data** method for modifying array data (returns enter, update and exit method).  
-(note, also 'selection.datum' for single data).
-Try out the example, what are the outputs for the console?
+<small>(note, also 'selection.datum' for single data). <br>
+Try out the example, what are the outputs for the console? </small>
 <aside class='notes'>
 </aside>
 	</textarea>
@@ -411,9 +487,9 @@ svg.selectAll("text")       // only be 1 (as only single text element)
 
 	### Join (Enter - Update - Exit)
 	
-```js
+<pre><code class='stretch'>
 <script src="https://d3js.org/d3.v6.min.js"></script>
-<svg viewBox="0 -20 200 200">
+<svg viewBox="0 -20 200 200"></svg>
 <script>
 const svg = d3.select('svg');
 
@@ -428,7 +504,7 @@ svg.selectAll("text")
      exit   => { console.log('exit called');   } 
   );
 </script>
-```
+</code></pre>
 
 The example will add three new 'text' components to the 'svg', but you won't see anything, as they have no 'content'.
 <aside class='notes'>
@@ -444,9 +520,9 @@ The example will add three new 'text' components to the 'svg', but you won't see
 
 	### Join (Enter - Update - Exit)
 	
-```js
+<pre><code class='stretch'>
 <script src="https://d3js.org/d3.v6.min.js"></script>
-<svg viewBox="0 -20 200 200">
+<svg viewBox="0 -20 200 200"></svg>
 <script>
 const svg = d3.select('svg');
 
@@ -461,8 +537,7 @@ svg.selectAll("text")
      exit   => { console.log('exit called');   } 
   );
 </script>
-</script>
-```
+</code></pre>
 
 You can see some of the 'new' visual elements and data (but the old' data is still viewable.
 Why?  ('enter' only deals with adding new visual elements to accomidate the change in data size)
@@ -480,7 +555,7 @@ Why?  ('enter' only deals with adding new visual elements to accomidate the chan
 	
 ```js
 <script src="https://d3js.org/d3.v6.min.js"></script>
-<svg viewBox="0 -20 200 200">
+<svg viewBox="0 -20 200 200"></svg>
 <script>
 const svg = d3.select('svg');
 
@@ -494,7 +569,6 @@ svg.selectAll("text")
      update => { update.attr('fill', 'blue'); },
      exit   => { console.log('exit called');   } 
   );
-</script>
 </script>
 ```
 
@@ -513,7 +587,7 @@ svg.selectAll("text")
 	
 ```js
 <script src="https://d3js.org/d3.v6.min.js"></script>
-<svg viewBox="0 -20 200 200">
+<svg viewBox="0 -20 200 200"></svg>
 <script>
 const svg = d3.select('svg');
 
@@ -527,7 +601,6 @@ svg.selectAll("text")
      update => { update.text(d=>d).attr('fill', 'blue'); },
      exit   => { console.log('exit called');   } 
   );
-</script>
 </script>
 ```
 
@@ -546,7 +619,7 @@ svg.selectAll("text")
 	
 ```js
 <script src="https://d3js.org/d3.v6.min.js"></script>
-<svg viewBox="0 -20 200 200">
+<svg viewBox="0 -20 200 200"></svg>
 <script>
 const svg = d3.select('svg');
 
@@ -560,7 +633,6 @@ svg.selectAll("text")
      update => { update.text(d=>d).attr('fill', 'blue'); },
      exit   => { exit.remove();   } 
   );
-</script>
 </script>
 ```
 

@@ -28,7 +28,56 @@ Interactive data visualization is extremely important due to its ability to opti
 
 Instead, interactive visuals are an ideal way to communicate high-level understanding of a system, department or a project. Allows you to compartmentalize data and create hierarchies, moving granular information to inside the visualization or simply to a different section.
 
+# Short List of Essential D3 Methods (D3 Lookup/CheatSheet)
 
+**Selectors**
+```js
+//add class
+d3.selectAll('.foo').classed('foobar', true);
+//remove class
+d3.selectAll('.foo').classed('foobar', false);
+```
+
+**Attribute and Style update**
+```js
+//set attribute
+d3.selectAll('.foo').attr('data-type', 'foobar');
+//set css style
+d3.selectAll('.foo').style('background-color', '#666');
+```
+
+**AJAX**
+```js
+d3.json('http://url-to-resource.json', doSomething);
+d3.text('http://url-to-resource.txt', doSomething);
+```
+
+**Append & Prepend**
+```js
+d3.selectAll('.foo').append('div');
+d3.selectAll('.foo').insert('div');
+```
+
+**Event Listening**
+```js
+d3.selectAll('.foo').on('click', clickHandler);
+```
+
+**Remove Elements**
+```js
+d3.selectAll('.foo').remove();
+```
+
+**Subselect**
+```js
+d3.selectAll('.foo').selectAll('.bar'); //similar to jQuery's find
+```
+
+**Content Manipulation**
+```js
+d3.selectAll('.foo').text('Hello World!');
+d3.selectAll('.foo').html('<div class="bar">Hello World!</div>');
+```
 
 
   </textarea>
