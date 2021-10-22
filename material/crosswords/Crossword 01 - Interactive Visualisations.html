@@ -1,0 +1,191 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Revision Crossword</title>
+
+<link rel="stylesheet" type="text/css" href="cw.css">
+
+<script type="text/javascript" src="cw.js"></script>
+
+<script type="text/javascript">
+window.onload = function(){
+
+	const myQuestions = [
+    {
+      clue: "D3 is a JavaScript library for _______________ data with HTML, SVG, and CSS",
+      answer: "visualizing"
+    }
+	,
+	{
+	  clue: "D3 stands for Data-Driven _______________",
+	  answer: "documents"
+	}
+	,
+	{
+	  clue: "SVG: __________ Vector Graphics",
+	  answer: "scalable"
+	}
+	,
+	{
+	  clue: "D3 allows you to bind arbitrary data to a Document _______ Model (DOM)",
+	  answer: "object"
+	}
+	,
+	{
+	  clue: "D3 is not a ____________ framework that seeks to provide every conceivable feature",
+	  answer: "monolithic"
+	}
+	,
+	{
+	  clue: "D3 is extremely fast, supporting large datasets and dynamic behaviors for ___________ and animation.",
+	  answer: "interaction"
+	}
+	,
+	{
+	  clue: "D3's emphasis on web __________ gives you the full capabilities of modern browsers without tying yourself to a proprietary framework.",
+	  answer: "standards"
+	}
+	,
+	{
+	  clue: "D3 allows you to bind arbitrary data to a DOM, and then apply data-driven _____________ to the document",
+	  answer: "transformations"
+	}
+	,
+	{
+	  clue: "Cascading ___________ Sheet",
+	  answer: "style"
+	}
+	,
+	{
+	  clue: "Visualisation: the use of ________ elements to represent data",
+	  answer: "visual"
+	}
+	,
+	{
+	  clue: "Method ___________, also known as named parameter idiom, is a common syntax for invoking multiple method calls in object-oriented programming languages",
+	  answer: "chaining"
+	}
+	];
+	
+	/*
+	const myQuestions = [
+    {
+      clue: "Man's best friend",
+      answer: "dog"
+    }
+	,
+    {
+      clue: "Likes to chase mice",
+      answer: "cat"
+    }
+	,
+	{
+	  clue: "Flying mammal",
+	  answer: "bat"
+	}
+	,
+	{
+	  clue: "Has a trunk",
+	  answer: "elephant"
+	}
+	,
+	{
+	  clue: "Large marsupial",
+	  answer: "kangaroo"
+	}
+	];
+	*/
+	
+	var words = [];
+	var clues = [];
+	
+	for (var aa=0; aa<myQuestions.length; aa++)
+	{
+		words.push( myQuestions[aa].answer.toLowerCase() );
+		clues.push( myQuestions[aa].clue );
+	}
+	
+	/*
+    // words[i] correlates to clues[i]
+    var words = ["dog", "cat", "bat", "elephant", "kangaroo"];
+    var clues = ["Man's best friend", "Likes to chase mice", "Flying mammal", "Has a trunk", "Large marsupial"];
+	*/
+	
+    // Create crossword object with the words and clues
+    var cw = new Crossword(words, clues);
+
+    // create the crossword grid (try to make it have a 1:1 width to height ratio in 10 tries)
+    var tries = 100; 
+    var grid = cw.getSquareGrid(tries);
+
+    // report a problem with the words in the crossword
+    if(grid == null){
+        var bad_words = cw.getBadWords();
+        var str = [];
+        for(var i = 0; i < bad_words.length; i++){
+            str.push(bad_words[i].word);
+        }
+        alert("Shoot! A grid could not be created with these words:\n" + str.join("\n"));
+        return;
+    }
+	
+	//console.log( grid );
+
+    // turn the crossword grid into HTML
+    var show_answers = true;
+    document.getElementById("crossword").innerHTML = CrosswordUtils.toHtml(grid, show_answers);
+
+    // make a nice legend for the clues
+    var legend = cw.getLegend(grid);
+    addLegendToPage(legend);
+};
+
+function addLegendToPage(groups){
+    for(var k in groups){
+        var html = [];
+        for(var i = 0; i < groups[k].length; i++){
+            html.push("<li><strong>" + groups[k][i]['position'] + ".</strong> " + groups[k][i]['clue'] + "</li>");
+        }
+        document.getElementById(k).innerHTML = html.join("\n");
+    }
+}
+</script>
+
+</head>
+
+<body> 
+    <div id="crossword"></div>
+    <table id="clues">
+        <thead>
+            <tr>
+                <th>Across</th>
+                <th>Down</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><ul id="across"></ul></td>
+                <td><ul id="down"></ul></td>
+            </tr>
+        </tbody>
+    </table>
+
+	<br>
+	<br>
+	<p style="text-align:center">
+	Revision Crossword<br> (Note: crossword squares turn yellow when the correct answer is typed).  Have fun!
+	</p>
+
+<div style="display: block; position: absolute; bottom: 0px; right: 0px; z-index:-90;">
+    <img src="../lectures/images/back.png" >
+</div>
+	
+<div id="myhome" style="display: block; position: absolute; bottom: 5px; left: 5px;">
+    <a href="https://f21dv.github.io" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+</div>
+
+
+</body>
+</html>
