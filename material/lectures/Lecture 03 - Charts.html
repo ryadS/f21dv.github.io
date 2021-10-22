@@ -129,32 +129,11 @@ console.log( pie(data) );
 	
 <section data-markdown style="text-align: left;">
 	<textarea data-template>
-	### `d3.pie()`
-
-	* `d3.pie()` function takes in a dataset and creates handy data for us to generate a pie chart in the SVG
-	* calculates the start angle and end angle for each wedge of the pie chart
-	
-	Consider the following: 
-	```html 
-<script src="https://d3js.org/d3.v6.min.js"></script>
-<script>
-var data = [2, 4, 8, 10];
-var pie = d3.pie();
-console.log( pie(data) );
-</script>
-	```
-<aside class='notes'>
-</aside>
-	</textarea>
-</section>
-
-<!-- ------------------------------------------------------------- -->
-	
-<section data-markdown style="text-align: left;">
-	<textarea data-template>
 	### `d3.pie()` 
 	
-	What you want to notice is the **startAngle** and **endAngle** values that `d3.pie()` calculated for your data.
+	Looking at what `d3.pie()` returns
+	
+	You want to notice the **startAngle** and **endAngle** values which `d3.pie()` calculates for your data.
 	
 	Below shows the **console.log** output from the previous example:
 	
@@ -190,7 +169,7 @@ console.log( pie(data) );
 	<textarea data-template>
 	### Minimum Working Example (MWE) D3 PIE
 
-	<pre><code class='stretch'>
+<pre><code class='stretch'> < !DOCTYPE HTML>
 <script src="https://d3js.org/d3.v6.min.js"></script>
 <svg viewBox="-25 -25 100 100">
 <script>
@@ -212,9 +191,11 @@ var arcs = svg.selectAll("arc") //Generate groups
 arcs.append("path")  //Draw arc paths
     .attr("fill", '#4daf4a' )
     .attr("d", arc);
-
 </script>
-	</code></pre>
+</code></pre>
+
+Try running the example above ...
+
 <aside class='notes'>
 </aside>
 	</textarea>
@@ -314,10 +295,10 @@ var arcs = svg.selectAll("arc") //Generate groups
 arcs.append("path")  //Draw arc paths
     .attr("fill", function(d, i) { return color(i); } )
     .attr("d", arc);
-
 </script>
 </code></pre>
 
+Test the above example - see the output (generated chart)
 <aside class='notes'>
 </aside>
 	</textarea>
@@ -329,9 +310,10 @@ arcs.append("path")  //Draw arc paths
 	<textarea data-template>
 	## Summary
 
-	* D3 isn't limited to simple bar charts 
+	* D3 isn't limited to simple **bar charts**
 	* Easily extended to represent complex models/shapes/layouts
-	* Able to accomodate flexible data formats
+	* Able to accommodate flexible data formats
+	  - (also *changing* data)
 <aside class='notes'>
 </aside>
 	</textarea>
