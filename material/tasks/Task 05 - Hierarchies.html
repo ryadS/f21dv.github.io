@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Data Visualization and Analytics</title>
+  <link rel="stylesheet" href="./md2html/theme.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.7.2/showdown.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/go.min.js"></script>
+
+</head>
+<body>
+  <div id="content"></div>
+  <textarea id="input" style='display:none'>
+
+# Lab - Hierarchies
+
+These tasks provide an opportunity for you to try out and experiment with the D3 features (e.g., customizing and modifying basic examples to specific problems and data sets).
+
+
+# d3.hierarchy(..) method
+
+Let's start by looking a simple minimum working example.  Given a hierarchical data structure (in json format), you'll use the d3.hierarchy(..) method to read in the data.  Then using the 'console.log(..)' method print out the data and its associated information (depth and values).
+
+```
+<script type='text/javascript' src='https://d3js.org/d3.v7.min.js'></script>
+
+<script>
+var data = {"name":"A", "size":1, "children":[
+                 {"name":"B", "size":2},
+                 {"name":"C", "size":3, "children":[
+                     {"name":"E", "size":5},
+                     {"name":"F", "size":6}]},
+                 {"name":"D", "size":4}]};
+
+// build hierarchy
+var root = d3.hierarchy(data);
+
+// how many elements are in the hierarchy
+var count = root.descendants().length;
+console.log('count:', count );
+
+// node.each traverses the tree from that node, repeatedly calling a function on each descendant node.
+root.each( (d) => { console.log('depth:', d.depth, ' name:', d.data.name ); } );
+```
+
+Output for the above script:
+```
+["count:",6]
+["depth:",0," name:","A"]
+["depth:",1," name:","B"]
+["depth:",1," name:","C"]
+["depth:",1," name:","D"]
+["depth:",2," name:","E"]
+["depth:",2," name:","F"]
+[0]
+[1]
+[1]
+[2]
+[2]
+[1]
+```
+
+---
+
+
+**Exercise:** As an exercise, try modifying the simple example so it processes a more complex json hierarchy set. 
+
+
+
+**Exercise:** Try using the D3 AJAX methods, which let you read in external files ( d3.json, d3.csv, ...), to read in an external json file (hierarchical data source) and print out the information (as above using console.log(..)).
+
+
+
+
+
+
+
+</textarea>
+  
+<br><br>
+  
+
+
+
+
+
+
+<script>
+
+   //function htmlEntities(str) {
+   //   return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+   //}
+
+	let eleminput = document.getElementById('input')
+	//let txt = elem.innerHTML;
+	//txt = htmlEntities( txt );
+	//elem.innerHTML = txt;
+	
+    elem = document.getElementById('content')
+    converter = new showdown.Converter();
+    elem.innerHTML = converter.makeHtml(eleminput.value)
+    
+	hljs.initHighlightingOnLoad();
+</script>
+<!--
+  <script src="https://yihui.name/js/math-code.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+-->
+  
+<div id="myhome" style="z-index: auto; display: block; position: fixed; bottom: 5px; left: 5px;">
+    <a href="https://f21dv.github.io" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+</div>
+
+
+<!-- ------------------------------------------------------------------ -->
+
+<!-- EXAMPLE x -->
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
