@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Notes - Data Visualization and Analytics</title>
+  <link rel="stylesheet" href="./md2html/theme.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.7.2/showdown.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.7.2/showdown-table.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/go.min.js"></script>
+
+</head>
+<body>
+
+
+  <textarea id="content">
+
+# Notes - Data Visualization and Analytics
+
+Supplementary notes to complement the lecture material for Data Visualization and Analytics (F20DV/F21DV).
+
+# Scalable Applications
+
+More than just **throwing graphics on screen*.  You want to develop solutions that are reusable, extendable and easy to manage and debug.
+
+For example, there are various ways of managing complex projects in JavaScript, one popular approach is: **Object factory**.
+
+
+* A **function** that **returns** an **object**
+* Use Factory functions to **imitate** `classes`
+* Factory function has:
+  * Public and private functions
+  * Public and private variables
+  
+Take a look at the following example, which declares variables within an object which are *private*.
+
+```js 
+function CarMonitor() 
+{
+  var privatespeed = 0;
+  let obj = {};
+  obj.publicname = 'car';
+  obj.accelerate = function()
+  {
+    return privatespeed++;
+  }
+  obj.name = function()
+  {
+    return obj.publicname;
+  }
+  return obj;
+}
+
+var car    = CarMonitor();
+var redCar = CarMonitor()
+console.log(car.accelerate()); // 0
+console.log(car.accelerate()); // 1
+console.log(redCar.accelerate()); // 0
+console.log(redCar.accelerate()); // 1
+console.log(car.accelerate()); // 2
+console.log(redCar.accelerate()); // 2
+console.log(car.privatespeed); // privatespeed is not defined (private)
+console.log(car.publicname); // access publicname
+```
+
+When using the function factory architecture you have flexibility in how you build your object. Factory functions allow you to **define private variables and methods** inside of the instantiation function. In the example above, the **CarMonitor** function has a public variable and a private variable. The private variable is not accessible from outside the car function.
+
+---
+
+# Scalable *Visualizations*
+
+Take advantage of object factories by constructing a *reusable* implementation that displays some data using the D3 library (e.g., you create an instance, specify attributes, such as, the position, size and data). Then you **initialize** the graphical display.  Hence, you should be able to put multiple D3 graphs on screen easily using your developed code.  Once you're comfortable with the concept (encapsulation and accessor methods), extend the idea to allow users to **update** their visualizations on the fly (e.g., click a button new data is generated and passed to your method, which updates the graphical output).
+
+
+
+
+</textarea>
+  
+
+
+  
+<script>
+var text = document.getElementById('content');
+
+converter = new showdown.Converter({tables: 'true', disableForced4SpacesIndentedSublists: 'true', simpleLineBreaks: 'true'});
+
+var html = converter.makeHtml(text.value)
+text.parentNode.removeChild( text );
+
+var div = document.createElement('div');
+div.id = "content";
+document.body.appendChild( div );
+div.innerHTML = html;
+
+hljs.initHighlightingOnLoad();
+</script>
+<!--
+  <script src="https://yihui.name/js/math-code.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  -->
+  
+<div id="myhome" style="z-index: auto; display: block; position: fixed; bottom: 5px; left: 5px;">
+    <a href="https://f21dv.github.io" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+</div>
+
+
+
+
+</body>
+</html>
