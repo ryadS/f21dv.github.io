@@ -68,13 +68,13 @@ console.log(car.publicname); // access publicname
 
 When using the function factory architecture you have flexibility in how you build your object. Factory functions allow you to **define private variables and methods** inside of the instantiation function. In the example above, the **CarMonitor** function has a public variable and a private variable. The private variable is not accessible from outside the car function.
 
----
+
 
 # Scalable *Visualizations*
 
 Take advantage of object factories by constructing a *reusable* implementation that displays some data using the D3 library (e.g., you create an instance, specify attributes, such as, the position, size and data). Then you **initialize** the graphical display.  Hence, you should be able to put multiple D3 graphs on screen easily using your developed code.  Once you're comfortable with the concept (encapsulation and accessor methods), extend the idea to allow users to **update** their visualizations on the fly (e.g., click a button new data is generated and passed to your method, which updates the graphical output).
 
-
+You can see from example above that we can allow the object to fit the needs of parameters. In your development environment you can add methods that can save information. This gives you a more granular way of controlling your code. Overall, **factory functions are very future-proof**, flexible and dynamic. Using them to write your JavaScript visualizations will allow for a more controlled architecture that can be easily maintained throughout the life of a project.
 
 
 </textarea>

@@ -1,0 +1,92 @@
+<html>
+<head>
+
+<link rel="stylesheet" href="./quiz.css">
+<script src="./prettyprint/run_prettify.js"></script>
+
+</head>
+<body>
+
+<h1>Revision Quiz</h1>
+
+<button id="previous">Previous Question</button>
+<button id="next">Next Question</button>
+<button id="submit">Submit Quiz</button>
+<div id="results"></div>
+
+<div class="quiz-container">
+  <div id="quiz"></div>
+</div>
+
+<script>
+  const myQuestions = [
+    {
+      question: "Which type of JavaScript language is ___",
+      answers: {
+        a: "Object-Oriented",
+		b: "Object-Based",
+		c: "Assembly-language",
+		d: "High-level"
+      },
+      correctAnswer: "b"
+    }
+	,
+    {
+      question: `
+Which of the following is the correct output for the following JavaScript code:
+
+var x=5,y=1; 
+var obj ={ x:10}  
+with(obj)  
+{  
+   console.log(y)  
+} 
+	  `,
+      answers: {
+        a: "1",
+		b: "Error",
+		c: "10,
+		d: "5"
+      },
+      correctAnswer: "d"
+    }
+	,
+    {
+      question: "Which of the following variables takes precedence over the others if the names are the same?",
+      answers: {
+        a: "Global variable",
+		b: "The local element",
+		c: "Neither (fail)",
+		d: "Random which element is used"
+      },
+      correctAnswer: "b"
+    }
+	,
+	{
+      question: "When you call a function with the 'new' keyword in JavaScript, you get in return an empty object with a 'this' binding set",
+      answers: {
+        a: "True",
+		b: "False"
+      },
+      correctAnswer: "a"
+    }
+
+
+	
+  ];
+  
+  
+</script>
+<script src="./quiz.js"></script>
+
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20; text-align: left;">
+        <a href="https://f21dv.github.io" class="twitter-follow-button" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+    </div>
+</div>
+
+
+</body>
+</html>
+
+
